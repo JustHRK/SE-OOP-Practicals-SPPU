@@ -12,24 +12,94 @@ following
 #include<iostream>
 using namespace std;
 
-int greatest(int arr[25],int n)
+class complex{
+int x,y;
+public:
+complex()
 {
-    int max=arr[0];
-    for (int i=0;i<n;i++)
-    {
-        if(max>arr[i]);
-    }
-    return max;
+    x=0;
+    y=0;
 }
+
+    friend void operator>>(complex &a ,complex &b)
+    {
+        cout<<"Enter Value of (x1):";
+        cin>>a.x;
+        cout<<"Enter Value of (y1):";
+        cin>>a.y;
+        cout<<"Enter Value of (x2):";
+        cin>>b.x;
+        cout<<"Enter Value of (y2):";
+        cin>>b.y;
+    }
+
+    friend void operator<<(complex &a, complex &b)
+    {
+        cout<<"First Complex No. ("<<a.x<<" + "<<a.y<<"i )"<<endl;
+        cout<<"Second Complex No. ("<<b.x<<" + "<<b.y<<"i )"<<endl;
+    }
+
+    friend void operator+(complex &a, complex &b)
+    {
+        complex add;
+        add.x=a.x+b.x;
+        add.y=a.y+b.y;
+        if(add.y> 0)
+            cout<<"Addition of Complex No. ="<<add.x<<" + "<<add.y<<"i"<<endl;
+        else
+            cout<<"Addition of Complex No. ="<<add.x<<" - "<<(-1)*add.y<<"i"<<endl;
+    }
+
+    friend void operator-(complex &a, complex &b)
+    {
+        complex sub;
+        sub.x=a.x-b.x;
+        sub.y=a.y-b.y;
+        if(sub.y> 0)
+            cout<<"Subtraction of Complex No. ="<<sub.x<<" + "<<sub.y<<"i"<<endl;
+        else
+            cout<<"Subtraction of Complex No. ="<<sub.x<<" - "<<(-1)*sub.y<<"i"<<endl;
+    }
+
+    friend void operator*(complex &a,complex &b)
+    {
+        complex mul;
+        mul.x=(a.x*b.x)-(a.y*b.y);
+        mul.y=(a.x*b.y)+(b.x*a.y);
+        if(mul.y> 0)
+            cout<<"Multiplication of Complex No. ="<<mul.x<<" + "<<mul.y<<"i"<<endl;
+        else
+            cout<<"Multiplication of Complex No. ="<<mul.x<<" - "<<(-1)*mul.y<<"i"<<endl;
+    }
+};
 
 int main()
 {
-    int ar[25],n;
-    cout<<"Enter Number of elements in array:"<<endl;
-    cin>>n;
-    cout<<"Enter Elements of array:"<<endl;
-    for(int i=0;i<n;i++)
-        cin>>ar[i];
-    cout<<"Greatest No. :"<<greatest(ar,n);
+    char des;
+    char ch;
+    complex s1,s2;
+    operator>>(s1,s2);
+    operator<<(s1,s2);
+    do
+    {
+        cout<<"Choose Operation:\n"
+                "+ : Addition\n"
+                "- : Subtraction\n"
+                "* : Multiplication\n"
+                "Enter Choice:";cin>>ch;
+            
+        switch(ch)
+        {
+            case '+':s1+s2; break;
+        
+            case '-':s1-s2; break;
+
+            case '*':s1*s2; break;
+
+            default:cout<<"Invalid Choice!\n";
+        }
+        cout<<"Do you want to continue (y/n) :"; cin>>des;
+    
+    } while (des=='y');
     return 0;
 }
